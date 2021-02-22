@@ -20,7 +20,7 @@ float get_mV(uint8_t chan)
   }
   else if (chan == 1)
   {
-    v = ADC.readADC_Differential_0_1() * ADC_V_PER_COUNT * ADC_V_PER_V_IN_2;
+    v = ADC.readADC_Differential_2_3() * ADC_V_PER_COUNT * ADC_V_PER_V_IN_2;
   }
 
   return v;
