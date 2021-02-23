@@ -6,7 +6,7 @@ Adafruit_ADS1115 ADC;
 Adafruit_INA219 INA1(0x40);
 Adafruit_INA219 INA2(0x41);
 
-float adc_v_per_count;                   // multiply by ADC count to get voltage on ADC pin, based on ADC gain setting
+float adc_mV_per_count;                   // multiply by ADC count to get voltage on ADC pin, based on ADC gain setting
 const float ADC_V_PER_V_IN_1 = (11 / 1); // resistor divider on channel 1
 const float ADC_V_PER_V_IN_2 = (11 / 1); // resistor divider on channel 2
 
@@ -24,25 +24,25 @@ void set_range_i_2000mA(){
 void set_range_v_45V()
 {
   ADC.setGain(GAIN_ONE);
-  adc_v_per_count = 0.000125;
+  adc_mV_per_count = 0.125;
 }
 
 void set_range_v_22V()
 {
   ADC.setGain(GAIN_TWO);
-  adc_v_per_count = 0.0000625;
+  adc_mV_per_count = 0.0625;
 }
 
 void set_range_v_11V()
 {
   ADC.setGain(GAIN_FOUR);
-  adc_v_per_count = 0.00003125;
+  adc_mV_per_count = 0.03125;
 }
 
 void set_range_v_5V()
 {
   ADC.setGain(GAIN_EIGHT);
-  adc_v_per_count = 0.000015625;
+  adc_mV_per_count = 0.015625;
 }
 
 float get_mV(uint8_t chan)
@@ -51,11 +51,11 @@ float get_mV(uint8_t chan)
 
   if (chan == 0)
   {
-    v = ADC.readADC_Differential_0_1() * adc_v_per_count * ADC_V_PER_V_IN_1;
+    v = ADC.readADC_Differential_0_1() * adc_mV_per_count * ADC_V_PER_V_IN_1;
   }
   else if (chan == 1)
   {
-    v = ADC.readADC_Differential_2_3() * adc_v_per_count * ADC_V_PER_V_IN_2;
+    v = ADC.readADC_Differential_2_3() * adc_mV_per_count * ADC_V_PER_V_IN_2;
   }
 
   return v;
