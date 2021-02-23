@@ -11,26 +11,26 @@ class DualPowerMeter():
         self.v2 = 0.0
         self.i2 = 0.0
 
-    def write_command(command: str):
+    def write_command(self, command: str):
         self.ser.write(command.encode('utf-8'))
 
     def get_new_reading(self):
         self.write_command("R");
-        self.v1 = float(self.ser.readline())
-        self.i1 = float(self.ser.readline())
-        self.v2 = float(self.ser.readline())
-        self.i2 = float(self.ser.readline())
+        self.v1 = float(self.ser.readline()) / 1000.0
+        self.i1 = float(self.ser.readline()) / 1000.0
+        self.v2 = float(self.ser.readline()) / 1000.0
+        self.i2 = float(self.ser.readline()) / 1000.0
 
-    def set_range_v_45V()
+    def set_range_v_45V(self):
         self.write_command("V")
 
-    def set_range_v_22V()
+    def set_range_v_22V(self):
         self.write_command("v")
 
-    def set_range_i_400mA()
+    def set_range_i_400mA(self):
         self.write_command("i")
 
-    def set_range_i_2A()
+    def set_range_i_2A(self):
         self.write_command("I")
 
     def get_v1(self):
